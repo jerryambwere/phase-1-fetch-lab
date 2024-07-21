@@ -1,21 +1,9 @@
-const fetch = require("node-fetch");
-
 function fetchBooks() {
-  fetch("https://anapioficeandfire.com/api/books")
-  .then(res=> res.json())
-  .then (response=> console.log(response))
-}
-  // To pass the tests, don't forget to return your fetch!
+  const url = 'https://anapioficeandfire.com/api/books';
   
-
-function renderBooks(books) {
-  const main = document.querySelector('main');
-  books.forEach(book => {
-    const h2 = document.createElement('h2');
-    h2.innerHTML = book.name;
-    main.appendChild(h2);
-  });
+  // Using fetch to make the API call
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => renderBooks(data))
+    .catch(error => console.log('Error fetching books:', error));
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-  fetchBooks() })
